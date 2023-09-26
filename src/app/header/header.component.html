@@ -1,0 +1,6 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container-fluid">
+        <a *ngFor="let item of items" class="nav-link" [routerLink]="item.route"
+            [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">{{item.title}}</a>
+    </div>
+</nav>
