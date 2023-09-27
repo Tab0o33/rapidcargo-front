@@ -7,6 +7,7 @@ import { notEqualValidator } from '../validators/notEqual.validator';
 import { MovementIn } from '../models/movement-in.model';
 import { Router } from '@angular/router';
 import { MovementOut } from '../models/movement-out.model';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-common-form',
@@ -44,53 +45,44 @@ export class CommonFormComponent implements OnInit {
         this.initMainForm();
     }
 
-    generateMovementOutObject(): MovementOut {
-        return new MovementOut(
-            this.commonForm.value.technicalId,
-            this.commonForm.value.creationDateTime,
-            this.commonForm.value.creationUserName,
-            this.commonForm.value.dateTime,
-            this.movementService.declarationLocation,
-            this.globalForm.value.merchandiseInfo,
-            this.commonForm.value.warehouseCode,
-            this.commonForm.value.warehouseLabel,
-            this.commonForm.value.customsStatus,
-            this.customsDocumentForm.value.documentType,
-            this.customsDocumentForm.value.documentRef
-        );
-    }
-
-    generateMovementInObject(): MovementIn {
-        return new MovementIn(
-            this.commonForm.value.technicalId,
-            this.commonForm.value.creationDateTime,
-            this.commonForm.value.creationUserName,
-            this.commonForm.value.dateTime,
-            this.movementService.declarationLocation,
-            this.globalForm.value.merchandiseInfo,
-            this.commonForm.value.warehouseCode,
-            this.commonForm.value.warehouseLabel,
-            this.commonForm.value.customsStatus
-        );
-    }
-
-
     onSubmitForm() {
-        let postNewMovement: any;
-        let dataToSubmit: MovementOut | MovementIn;
+        let callAPI: Observable<any>;
         if (this.isMovementTypeOut) {
-            dataToSubmit = this.generateMovementOutObject();
-            postNewMovement = this.movementService.postNewOutputMovement;
+            const dataToSubmit: MovementOut = new MovementOut(
+                this.commonForm.value.technicalId,
+                this.commonForm.value.creationDateTime,
+                this.commonForm.value.creationUserName,
+                this.commonForm.value.dateTime,
+                this.movementService.declarationLocation,
+                this.globalForm.value.merchandiseInfo,
+                this.commonForm.value.warehouseCode,
+                this.commonForm.value.warehouseLabel,
+                this.commonForm.value.customsStatus,
+                this.customsDocumentForm.value.documentType,
+                this.customsDocumentForm.value.documentRef
+            );
+            callAPI = this.movementService.postNewOutputMovement(dataToSubmit);
         } else {
-            dataToSubmit = this.generateMovementInObject();
-            postNewMovement = this.movementService.postNewInputMovement
+            const dataToSubmit: MovementIn = new MovementIn(
+                this.commonForm.value.technicalId,
+                this.commonForm.value.creationDateTime,
+                this.commonForm.value.creationUserName,
+                this.commonForm.value.dateTime,
+                this.movementService.declarationLocation,
+                this.globalForm.value.merchandiseInfo,
+                this.commonForm.value.warehouseCode,
+                this.commonForm.value.warehouseLabel,
+                this.commonForm.value.customsStatus
+            );
+            callAPI = this.movementService.postNewInputMovement(dataToSubmit);
         }
-        postNewMovement(dataToSubmit).subscribe({
-            next: () => {
-                this.displayAlert('valid', 'Mouvement enregistré avec succès');
+        callAPI.subscribe({
+            next: async (v) => {
+                await this.displayAlert('valid', 'Mouvement enregistré avec succès');
                 this.onResetForm();
+
             },
-            error: () => {
+            error: (e) => {
                 this.displayAlert('error', 'Service indisponible');
             }
         });
@@ -152,11 +144,14 @@ export class CommonFormComponent implements OnInit {
         });
     }
 
-    displayAlert(type: string, message: string) {
+    displayAlert(type: string, message: string): Promise<void> {
         this.alert = { type, message };
-        setTimeout(() => {
-            this.alert = undefined;
-        }, 3000);
+        return new Promise<void>((resolve) => {
+            setTimeout(() => {
+                this.alert = undefined;
+                resolve();
+            }, 3000);
+        });
     }
 
 }
