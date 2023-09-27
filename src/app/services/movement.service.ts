@@ -1,17 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MovementIn } from '../models/movement-in.model';
 import { MovementOut } from '../models/movement-out.model';
-
-const API_URL = "http://localhost:9000/api/v1";
-
-const HTTP_OPTIONS = {
-    headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-    }),
-    withCredentials: true
-};
+import { API_URL, HTTP_OPTIONS } from '../properties';
 
 @Injectable({
     providedIn: 'root'
