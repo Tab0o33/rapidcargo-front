@@ -1,60 +1,61 @@
 <h2>Mouvement</h2>
+<div [formGroup]="form">
+    <div class="row g-3 m-2" formGroupName="commonInfo">
+        <div class="col-6">
+            <div class="row row-cols-lg-auto align-items-center">
+                <div class="col-lg-4">
+                    <label for="technicalId" class="form-label">Identifiant technique</label>
+                </div>
+                <div class="col-lg-5">
+                    <input type="number" class="form-control" formControlName="technicalId" id="technicalId">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row row-cols-lg-auto align-items-center">
+                <div class="col-lg-4">
+                    <label for="declarationLocation" class="form-label">Lieu de déclaration</label>
+                </div>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" id="declarationLocation"
+                        placeholder={{movementService.declarationLocation}} disabled>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="row g-3 m-2">
-    <div class="col-6">
-        <div class="row row-cols-lg-auto align-items-center">
-            <div class="col-lg-4">
-                <label for="technicalId" class="form-label">Identifiant technique</label>
+    <div class="row g-3 m-2" formGroupName="commonInfo">
+        <div class="col-6">
+            <div class="row row-cols-lg-auto align-items-center">
+                <div class="col-lg-4">
+                    <label for="creationDateTime" class="form-label">Création du mouvement</label>
+                </div>
+                <div class="col-lg-5">
+                    <input type="date" class="form-control" formControlName="creationDateTime" id="creationDateTime">
+                </div>
             </div>
-            <div class="col-lg-5">
-                <input type="number" class="form-control" [formControl]="controlTechnicalId" id="technicalId">
+        </div>
+        <div class="col-6">
+            <div class="row row-cols-lg-auto align-items-center">
+                <div class="col-lg-4">
+                    <label for="creationUserName" class="form-label">Utilisateur</label>
+                </div>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" formControlName="creationUserName" id="creationUserName">
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-6">
-        <div class="row row-cols-lg-auto align-items-center">
-            <div class="col-lg-4">
-                <label for="declarationLocation" class="form-label">Lieu de déclaration</label>
-            </div>
-            <div class="col-lg-5">
-                <input type="text" class="form-control" id="declarationLocation"
-                    placeholder={{movementService.declarationLocation}} disabled>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row g-3 m-2">
-    <div class="col-6">
-        <div class="row row-cols-lg-auto align-items-center">
-            <div class="col-lg-4">
-                <label for="creationDateTime" class="form-label">Création du mouvement</label>
-            </div>
-            <div class="col-lg-5">
-                <input type="date" class="form-control" [formControl]="controlCreationDateTime" id="creationDateTime">
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="row row-cols-lg-auto align-items-center">
-            <div class="col-lg-4">
-                <label for="creationUserName" class="form-label">Utilisateur</label>
-            </div>
-            <div class="col-lg-5">
-                <input type="text" class="form-control" [formControl]="controlCreationUserName" id="creationUserName">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row g-3 m-2">
-    <div class="col-6">
-        <div class="row row-cols-lg-auto align-items-center">
-            <div class="col-lg-4">
-                <label for="dateTime" class="form-label">Date du mouvement</label>
-            </div>
-            <div class="col-lg-5">
-                <input type="date" class="form-control" [formControl]="controlDateTime" id="dateTime">
+    <div class="row g-3 m-1" formGroupName="commonInfo">
+        <div class="col-6">
+            <div class="row row-cols-lg-auto align-items-center">
+                <div class="col-lg-4">
+                    <label for="dateTime" class="form-label">Date du mouvement</label>
+                </div>
+                <div class="col-lg-5">
+                    <input type="date" class="form-control" formControlName="dateTime" id="dateTime">
+                </div>
             </div>
         </div>
     </div>

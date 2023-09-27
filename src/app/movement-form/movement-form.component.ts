@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MovementService } from '../services/movement.service';
-import { FormControl } from '@angular/forms';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
     selector: 'app-movement-form',
@@ -9,11 +9,14 @@ import { FormControl } from '@angular/forms';
 })
 export class MovementFormComponent {
 
-    @Input() controlTechnicalId: FormControl = new FormControl();
-    @Input() controlCreationDateTime: FormControl = new FormControl();
-    @Input() controlCreationUserName: FormControl = new FormControl();
-    @Input() controlDateTime: FormControl = new FormControl();
+    form!: FormGroup;
 
-    constructor(public movementService: MovementService) { }
+    constructor(
+        public movementService: MovementService,
+        private rootFormGroup: FormGroupDirective) { }
+
+    ngOnInit(): void {
+        this.form = this.rootFormGroup.control;
+    }
 
 }

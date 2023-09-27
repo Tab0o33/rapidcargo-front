@@ -1,7 +1,7 @@
 import { Merchandise } from "./merchandise.model";
 import { Movement } from "./movement.model";
 
-export class MovmentIn extends Movement {
+export class MovementIn extends Movement {
     constructor(
         technicalId: number,
         creationDateTime: Date,
