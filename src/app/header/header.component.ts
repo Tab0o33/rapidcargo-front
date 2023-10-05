@@ -12,7 +12,8 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.items = [
             { title: 'Mouvement d\'entrée', route: 'movement/in' },
-            { title: 'Mouvement de sortie', route: 'movement/out' }
+            { title: 'Mouvement de sortie', route: 'movement/out' },
+            { title: 'Liste des mouvements', route: 'movement/list' }
         ];
     }
 

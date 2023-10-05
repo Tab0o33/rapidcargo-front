@@ -1,0 +1,4 @@
+<h3>Derniers mouvements envoyés</h3>
+<div *ngIf="lastMovements$ | async as movements" class="m-4">
+    <app-table [headers]="headers" [rows]="movements"></app-table>
+</div>

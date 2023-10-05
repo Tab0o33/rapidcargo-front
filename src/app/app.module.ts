@@ -11,6 +11,9 @@ import { MovementFormComponent } from './movement-form/movement-form.component';
 import { HeaderComponent } from './header/header.component';
 import { CommonFormComponent } from './common-form/common-form.component';
 import { OutputFormComponent } from './output-form/output-form.component';
+import { TablePageComponent } from './table-page/table-page.component';
+import { TableComponent } from './table/table.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -19,7 +22,9 @@ import { OutputFormComponent } from './output-form/output-form.component';
         MovementFormComponent,
         HeaderComponent,
         CommonFormComponent,
-        OutputFormComponent
+        OutputFormComponent,
+        TablePageComponent,
+        TableComponent
     ],
     imports: [
         BrowserModule,
@@ -28,6 +33,7 @@ import { OutputFormComponent } from './output-form/output-form.component';
         ReactiveFormsModule
     ],
     providers: [
+        DatePipe,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockBackendInterceptor,

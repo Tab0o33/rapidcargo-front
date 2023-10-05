@@ -24,4 +24,8 @@ export class MovementService {
         return this.http.post<any>(url, dataToPost, HTTP_OPTIONS);
     }
 
+    public getLastMovements(): Observable<any[]> {
+        return this.http.get<any[]>(`${API_URL}/movements/latest`);
+    }
+
 }
