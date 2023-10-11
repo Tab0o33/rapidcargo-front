@@ -92,7 +92,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
         this.randomNumber = Math.random();
         if (request.method === 'POST' && (request.url.endsWith('/movement?type=in') || request.url.endsWith('/movement?type=out'))) {
             return this.randomNumber < 0.8 ? this.MOCK_POST_SUCCESS_RESPONSE : throwError(this.MOCK_POST_ERROR_RESPONSE);
-        } else if (request.method === 'GET' && request.url.endsWith('/movements')) {
+        } else if (request.method === 'GET' && request.url.endsWith('/movements/latest')) {
             return this.randomNumber < 0.8 ? this.MOCK_GET_SUCCESS_RESPONSE : throwError(this.MOCK_GET_ERROR_RESPONSE);
         } else {
             return next.handle(request);
